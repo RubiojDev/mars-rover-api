@@ -5,13 +5,13 @@ window.onload = () => {
     const columnas = 5;
 
     const mapa = Array.from({ length: filas }, () => Array(columnas).fill(0));
-    mapa[2][2] = 1;
-    mapa[1][2] = 2;
+    /*mapa[2][2] = 1;
+    mapa[1][2] = 2;*/
 
     renderMap(mapa);
 };
 
-function renderMap(mapa) {
+async function renderMap(mapa) {
     const container = document.getElementById("container");
     container.innerHTML = ""; // limpiar antes de volver a renderizar
 
@@ -30,11 +30,15 @@ function renderMap(mapa) {
     }
 
     rover = createRover();
-    let rock = createRock();
+    const roverJson = await getRover();
 
-    placeObject(rover, 2, 2);
-    placeObject(rock, 1, 4);
-    placeObject(createRock(), 2, 4);
+    placeObject(rover, roverJson.y, roverJson.x); //falta manejar las direcciones
+
+    const obstaclesJson = await getObstacles();
+    obstaclesJson.forEach((obstacleJson) => {
+        let rock = createRock();
+        placeObject(rock, obstacleJson.y, obstacleJson.x);
+    });
 }
 
 function createRover() {
@@ -71,6 +75,31 @@ function moveRover(y, x) {
 }
 
 function removeAllRocks() {
+    //hacer consulta al servidor y chequear respuesta antes de borrar
     const rocks = document.querySelectorAll(".rocks");
     rocks.forEach((rock) => rock.remove());
+}
+
+async function getRover() {
+    let roverResponse = await fetch("/api/rover", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    return await roverResponse.json();
+    //Manejar los errores
+}
+
+async function getObstacles() {
+    let obstacleResponse = await fetch("/api/obstacle", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    return await obstacleResponse.json();
+    //Manejar los errores
 }
