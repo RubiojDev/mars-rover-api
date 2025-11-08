@@ -1,0 +1,37 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    background-image: url("../images/texture_mars.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.cell {
+    border: 1px solid rgba(255, 255, 255, 0.1); /* opcional para ver la cuadrícula */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#rover,
+.rocks {
+    height: auto;
+    justify-self: center;
+    align-self: center;
+}
+
+#rover {
+    width: 95%;
+}
+
+.rocks {
+    width: 50%;
+}
