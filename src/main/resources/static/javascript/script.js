@@ -1,4 +1,5 @@
 let rover;
+const inputCommands = document.getElementById("input-commands");
 
 window.onload = () => {
     const filas = 5;
@@ -103,3 +104,7 @@ async function getObstacles() {
     return await obstacleResponse.json();
     //Manejar los errores
 }
+
+document.getElementById("avanzar-btn").addEventListener("click", () => {
+    inputCommands.value = "M";
+});

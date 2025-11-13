@@ -9,28 +9,81 @@
     <body>
         <div id="container"></div>
         <div id="container-footer">
-            <div id="view-panel">
-                <input
-                    type="text"
-                    id="input-commands"
-                    name="input-commands"
-                    readonly="true"
-                    placeholder="Commands"
-                />
-                <button type="button" id="send-btn" name="send-btn">
-                    <img src="images/send.png" alt="send" />
-                </button>
-                <button type="button" id="clear-btn" name="clear-btn">
-                    <img src="images/clear.png" alt="clear" />
-                </button>
-            </div>
-            <div id="controls">
-                <img src="images/avanzar.png" alt="avanzar" />
-                <img src="images/girar_izquierda.png" alt="girar izquierda" />
-                <img src="images/girar_derecha.png" alt="girar derecha" />
-                <img src="images/obstacle.png" alt="obstacle" />
-                <img src="images/reset.png" alt="reset" />
-            </div>
+            <form id="commands-form">
+                <div id="view-panel">
+                    <input
+                        type="text"
+                        id="input-commands"
+                        name="input-commands"
+                        readonly="true"
+                        placeholder="Commands"
+                    />
+                    <button
+                        type="button"
+                        id="send-btn"
+                        class="button"
+                        name="send-btn"
+                    >
+                        <img src="images/send.png" alt="send" />
+                    </button>
+                    <button
+                        type="button"
+                        id="clear-btn"
+                        class="button"
+                        name="clear-btn"
+                    >
+                        <img src="images/clear.png" alt="clear" />
+                    </button>
+                </div>
+                <div id="controls">
+                    <button
+                        type="button"
+                        id="avanzar-btn"
+                        class="button"
+                        name="avanzar-btn"
+                    >
+                        <img src="images/avanzar.png" alt="avanzar" />
+                    </button>
+                    <button
+                        type="button"
+                        id="girarIzquierda-btn"
+                        class="button"
+                        name="girarIzquierda-btn"
+                    >
+                        <img
+                            src="images/girar_izquierda.png"
+                            alt="girar izquierda"
+                        />
+                    </button>
+                    <button
+                        type="button"
+                        id="girarDerecha-btn"
+                        class="button"
+                        name="girarDerecha-btn"
+                    >
+                        <img
+                            src="images/girar_derecha.png"
+                            alt="girar derecha"
+                        />
+                    </button>
+                    <button
+                        type="button"
+                        id="obstacle-btn"
+                        class="button"
+                        name="obstacle-btn"
+                    >
+                        <img src="images/obstacle.png" alt="obstacle" />
+                    </button>
+                    <button
+                        type="button"
+                        id="reset-btn"
+                        class="button"
+                        name="reset-btn"
+                    >
+                        <img src="images/reset.png" alt="reset" />
+                    </button>
+                </div>
+            </form>
         </div>
 
         <script src="javascript/script.js"></script>
