@@ -1,4 +1,5 @@
 let rover;
+let commands = [];
 const inputCommands = document.getElementById("input-commands");
 
 window.onload = () => {
@@ -33,25 +34,25 @@ async function renderMap(mapa) {
     rover = createRover();
     const roverJson = await getRover();
 
-    placeObject(rover, roverJson.y, roverJson.x); //falta manejar las direcciones
+    placeObject(rover, roverJson.posY, roverJson.posX); //falta manejar las direcciones
 
     const obstaclesJson = await getObstacles();
     obstaclesJson.forEach((obstacleJson) => {
         let rock = createRock();
-        placeObject(rock, obstacleJson.y, obstacleJson.x);
+        placeObject(rock, obstacleJson.posY, obstacleJson.posX);
     });
 }
 
 function createRover() {
-    const rover = document.createElement("img");
+    let r = document.createElement("img");
 
-    rover.src = "images/rover.png";
-    rover.alt = "rover";
-    rover.id = "rover";
+    r.src = "images/rover.png";
+    r.alt = "rover";
+    r.id = "rover";
 
-    document.getElementById("container").appendChild(rover);
+    document.getElementById("container").appendChild(r);
 
-    return rover;
+    return r;
 }
 
 function createRock() {
@@ -66,13 +67,13 @@ function createRock() {
     return rock;
 }
 
-function placeObject(element, y, x) {
-    element.style.gridRowStart = y + 1;
-    element.style.gridColumnStart = x + 1;
+function placeObject(element, posY, posX) {
+    element.style.gridRowStart = posY + 1;
+    element.style.gridColumnStart = posY + 1;
 }
 
-function moveRover(y, x) {
-    placeObject(rover, y, x);
+function moveRover(posY, posX) {
+    placeObject(rover, posY, posX);
 }
 
 function removeAllRocks() {
@@ -82,7 +83,7 @@ function removeAllRocks() {
 }
 
 async function getRover() {
-    let roverResponse = await fetch("/api/rover", {
+    let roverResponse = await fetch("/rover", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -94,7 +95,7 @@ async function getRover() {
 }
 
 async function getObstacles() {
-    let obstacleResponse = await fetch("/api/obstacle", {
+    let obstacleResponse = await fetch("/obstacle", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -105,6 +106,26 @@ async function getObstacles() {
     //Manejar los errores
 }
 
-document.getElementById("avanzar-btn").addEventListener("click", () => {
-    inputCommands.value = "M";
+function addCommand(command) {
+    if (commands.length <= 15) {
+        commands.push(command);
+        document.getElementById("input-commands").value = commands.join(", ");
+    }
+}
+
+document.getElementById("moveForward-btn").addEventListener("click", () => {
+    addCommand("M");
+});
+
+document.getElementById("turnRight-btn").addEventListener("click", () => {
+    addCommand("R");
+});
+
+document.getElementById("turnLeft-btn").addEventListener("click", () => {
+    addCommand("L");
+});
+
+document.getElementById("clear-btn").addEventListener("click", () => {
+    commands.length = 0;
+    document.getElementById("input-commands").value = "";
 });
