@@ -44,15 +44,15 @@ async function renderMap(mapa) {
 }
 
 function createRover() {
-    let r = document.createElement("img");
+    let roverImg = document.createElement("img");
 
-    r.src = "images/rover.png";
-    r.alt = "rover";
-    r.id = "rover";
+    roverImg.src = "images/rover.png";
+    roverImg.alt = "rover";
+    roverImg.id = "rover";
 
-    document.getElementById("container").appendChild(r);
+    document.getElementById("container").appendChild(roverImg);
 
-    return r;
+    return roverImg;
 }
 
 function createRock() {
@@ -69,17 +69,24 @@ function createRock() {
 
 function placeObject(element, posY, posX) {
     element.style.gridRowStart = posY + 1;
-    element.style.gridColumnStart = posY + 1;
+    element.style.gridColumnStart = posX + 1;
 }
 
 function moveRover(posY, posX) {
     placeObject(rover, posY, posX);
 }
 
-function removeAllRocks() {
-    //hacer consulta al servidor y chequear respuesta antes de borrar
-    const rocks = document.querySelectorAll(".rocks");
-    rocks.forEach((rock) => rock.remove());
+async function deleteObstacles() {
+    let response = await fetch("/obstacle/delete", {
+        method: "DELETE",
+    });
+
+    if (!response.ok) {
+        console.log("ERROR");
+        return null;
+    }
+
+    return await response.text();
 }
 
 async function getRover() {
@@ -106,6 +113,18 @@ async function getObstacles() {
     //Manejar los errores
 }
 
+async function sendCommands() {
+    let response = await fetch("/rover/command", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ commandList: commands }),
+    });
+
+    return await response.json();
+}
+
 function addCommand(command) {
     if (commands.length <= 15) {
         commands.push(command);
@@ -125,7 +144,81 @@ document.getElementById("turnLeft-btn").addEventListener("click", () => {
     addCommand("L");
 });
 
-document.getElementById("clear-btn").addEventListener("click", () => {
+function clearInputCommands() {
     commands.length = 0;
     document.getElementById("input-commands").value = "";
+}
+
+document.getElementById("clear-btn").addEventListener("click", () => {
+    clearInputCommands();
 });
+
+document.getElementById("send-btn").addEventListener("click", async () => {
+    //agregar verificacion de si el arr esta vacio
+    const responseCommands = await sendCommands();
+    let rover = responseCommands.roverDto;
+    let isObstacleEncountered = responseCommands.obstacleEncountered;
+
+    //mostrar algun mensaje de obstaculo encontrado
+    moveRover(rover.posY, rover.posX);
+    clearInputCommands();
+});
+
+document.getElementById("reset-btn").addEventListener("click", async () => {
+    const responseDelete = await deleteObstacles();
+
+    if (!responseDelete) {
+        console.log("Fallo");
+        return;
+    }
+
+    const rocks = document.querySelectorAll(".rocks");
+    rocks.forEach((rock) => rock.remove());
+});
+
+document.getElementById("obstacle-btn").addEventListener("click", () => {
+    showModal();
+});
+
+function hideModal() {
+    document.getElementById("modal-overlay").style.display = "none";
+}
+
+function showModal() {
+    document.getElementById("modal-overlay").style.display = "block";
+}
+
+async function addObstacle(obstaclePosition) {
+    let response = await fetch("/obstacle/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obstaclePosition),
+    });
+
+    return await response.json();
+}
+
+document
+    .getElementById("setPositionBtn")
+    .addEventListener("click", async () => {
+        const x = parseInt(document.getElementById("posX-txt").value);
+        const y = parseInt(document.getElementById("posY-txt").value);
+
+        if (x < 0 || y < 0 || isNaN(x) || isNaN(y)) {
+            alert("Las coordenadas deben ser números positivos");
+            return;
+        }
+
+        const obstacle = { posX: x, posY: y };
+
+        const responseObstacle = await addObstacle(obstacle);
+        console.log(responseObstacle);
+
+        //envia datos al back y chequear respuesta
+        const rock = createRock();
+        placeObject(rock, y, x);
+
+        hideModal(); // cerrar modal
+    });

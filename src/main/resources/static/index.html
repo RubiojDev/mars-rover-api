@@ -9,75 +9,90 @@
     <body>
         <div id="container"></div>
         <div id="container-footer">
-            <form id="commands-form">
-                <div id="view-panel">
-                    <input
-                        type="text"
-                        id="input-commands"
-                        name="input-commands"
-                        readonly="true"
-                        placeholder="Commands"
-                    />
-                    <button
-                        type="button"
-                        id="send-btn"
-                        class="button"
-                        name="send-btn"
-                    >
-                        <img src="images/send.png" alt="send" />
-                    </button>
-                    <button
-                        type="button"
-                        id="clear-btn"
-                        class="button"
-                        name="clear-btn"
-                    >
-                        <img src="images/clear.png" alt="clear" />
-                    </button>
+            <div id="view-panel">
+                <input
+                    type="text"
+                    id="input-commands"
+                    name="input-commands"
+                    readonly="true"
+                    placeholder="Commands"
+                />
+                <button
+                    type="button"
+                    id="send-btn"
+                    class="button"
+                    name="send-btn"
+                >
+                    <img src="images/send.png" alt="send" />
+                </button>
+                <button
+                    type="button"
+                    id="clear-btn"
+                    class="button"
+                    name="clear-btn"
+                >
+                    <img src="images/clear.png" alt="clear" />
+                </button>
+            </div>
+            <div id="controls">
+                <button
+                    type="button"
+                    id="moveForward-btn"
+                    class="button"
+                    name="moveForward-btn"
+                >
+                    <img src="images/moveForward.png" alt="move forward" />
+                </button>
+                <button
+                    type="button"
+                    id="turnLeft-btn"
+                    class="button"
+                    name="turnLeft-btn"
+                >
+                    <img src="images/turnLeft.png" alt="turn left" />
+                </button>
+                <button
+                    type="button"
+                    id="turnRight-btn"
+                    class="button"
+                    name="turnRight-btn"
+                >
+                    <img src="images/turnRight.png" alt="turn Right" />
+                </button>
+                <button
+                    type="button"
+                    id="obstacle-btn"
+                    class="button"
+                    name="obstacle-btn"
+                >
+                    <img src="images/obstacle.png" alt="obstacle" />
+                </button>
+                <button
+                    type="button"
+                    id="reset-btn"
+                    class="button"
+                    name="reset-btn"
+                >
+                    <img src="images/reset.png" alt="reset" />
+                </button>
+            </div>
+        </div>
+
+        <div id="modal-overlay">
+            <div id="coordinate-modal">
+                <div class="title-row">Ingrese la Posicion del Obstaculo</div>
+                <div class="input-row">
+                    <label for="posX-txt">Pos X:</label>
+                    <input type="number" id="posX-txt" min="0" />
                 </div>
-                <div id="controls">
-                    <button
-                        type="button"
-                        id="moveForward-btn"
-                        class="button"
-                        name="moveForward-btn"
-                    >
-                        <img src="images/moveForward.png" alt="move forward" />
-                    </button>
-                    <button
-                        type="button"
-                        id="turnLeft-btn"
-                        class="button"
-                        name="turnLeft-btn"
-                    >
-                        <img src="images/turnLeft.png" alt="turn left" />
-                    </button>
-                    <button
-                        type="button"
-                        id="turnRight-btn"
-                        class="button"
-                        name="turnRight-btn"
-                    >
-                        <img src="images/turnRight.png" alt="turn Right" />
-                    </button>
-                    <button
-                        type="button"
-                        id="obstacle-btn"
-                        class="button"
-                        name="obstacle-btn"
-                    >
-                        <img src="images/obstacle.png" alt="obstacle" />
-                    </button>
-                    <button
-                        type="button"
-                        id="reset-btn"
-                        class="button"
-                        name="reset-btn"
-                    >
-                        <img src="images/reset.png" alt="reset" />
-                    </button>
+                <div class="input-row">
+                    <label for="posY-txt">Pos Y:</label>
+                    <input type="number" id="posY-txt" min="0" />
                 </div>
-            </form>
+                <div class="input-row">
+                    <button id="setPositionBtn">OK</button>
+                </div>
+            </div>
         </div>
 
         <script src="javascript/script.js"></script>

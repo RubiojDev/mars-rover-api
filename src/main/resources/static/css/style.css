@@ -33,7 +33,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 5px;
-    margin-bottom: 5px;
 }
 
 #input-commands {
@@ -86,4 +85,44 @@ body {
 
 .rocks {
     width: 50%;
+}
+
+#modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#coordinate-modal {
+    background: white;
+    padding: 10px;
+    margin: 100px auto;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.input-row {
+    display: flex; /* hace que label e input estén en fila */
+    justify-content: center; /* opcional, alinea al inicio */
+    align-items: center; /* alinea verticalmente el input con el label */
+    margin-bottom: 10px; /* espacio entre filas */
+}
+
+.title-row {
+    text-align: center;
+    margin-bottom: 10px; /* espacio entre filas */
+}
+
+.input-row label {
+    width: 50px; /* ancho fijo para que todos los labels se alineen */
+}
+
+#posX-txt,
+#posY-txt {
+    width: 40px;
 }
