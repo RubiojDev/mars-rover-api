@@ -122,6 +122,10 @@ body {
     width: 50px; /* ancho fijo para que todos los labels se alineen */
 }
 
+.input-row button {
+    margin-left: 10px; /* ancho fijo para que todos los labels se alineen */
+}
+
 #posX-txt,
 #posY-txt {
     width: 40px;
