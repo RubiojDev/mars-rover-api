@@ -8,6 +8,12 @@ import { deleteObstacles } from "./logic.js";
 import { clearCommandsArray } from "./logic.js";
 
 let roverImg;
+const roverRotation = {
+    EAST: "rotate(0deg) scaleX(1)",
+    SOUTH: "rotate(90deg) scaleX(1)",
+    WEST: "rotate(0deg) scaleX(-1)",
+    NORTH: "rotate(270deg) scaleX(1)",
+};
 
 document.getElementById("moveForward-btn").addEventListener("click", () => {
     setCommandInput("M");
@@ -35,18 +41,20 @@ document.getElementById("cancelBtn").addEventListener("click", () => {
 
 document.getElementById("send-btn").addEventListener("click", async () => {
     const responseCommands = await sendCommands();
-    console.log("1");
+
     if (responseCommands.error) {
         //manejar error
-        console.log("2");
-        console.log(responseCommands.error);
+        showError(responseCommands.error);
         return;
     }
-    console.log("3");
+
     const rover = responseCommands.data.roverDto;
     const isObstacleEncountered = responseCommands.data.obstacleEncountered; //mostrar algun mensaje de obstaculo encontrado
 
-    moveRover(rover.posY, rover.posX);
+    if (isObstacleEncountered) {
+        showError("Obstacle Encoutered");
+    }
+    moveRover(rover.posY, rover.posX, rover.direction);
     clearCommand();
 });
 
@@ -54,7 +62,7 @@ document.getElementById("reset-btn").addEventListener("click", async () => {
     const responseDelete = await deleteObstacles();
 
     if (responseDelete.error) {
-        //error
+        showError(responseDelete.error);
         return;
     }
 
@@ -69,7 +77,7 @@ document
         const y = parseInt(document.getElementById("posY-txt").value);
 
         if (x < 0 || y < 0 || isNaN(x) || isNaN(y)) {
-            alert("Las coordenadas deben ser números positivos");
+            showError("The coordinates must be positive numbers");
             return;
         }
 
@@ -77,8 +85,7 @@ document
 
         const responseObstacle = await addObstacle(obstacle);
         if (responseObstacle.error) {
-            console.log("34");
-            console.log(responseObstacle.error);
+            showError(responseObstacle.error);
             return;
         }
 
@@ -115,19 +122,19 @@ async function renderMap(rows, cols) {
         container.appendChild(cell);
     }
 
-    roverImg = createRover();
     const responseRover = await getRover();
     if (responseRover.error) {
-        //manejar el error
+        showError(responseRover.error);
         return;
     }
 
-    placeObject(roverImg, responseRover.data.posY, responseRover.data.posX); //falta manejar las direcciones
+    roverImg = createRover(responseRover.data.direction);
+    placeObject(roverImg, responseRover.data.posY, responseRover.data.posX);
 
     const responseObstacles = await getObstacles();
 
     if (responseObstacles.error) {
-        //manejar el error
+        showError(responseObstacles.error);
         return;
     }
 
@@ -135,14 +142,17 @@ async function renderMap(rows, cols) {
         let rockImg = createRock();
         placeObject(rockImg, obstacle.posY, obstacle.posX);
     });
+    showSuccess("Map Loaded");
 }
 
-function createRover() {
+function createRover(direction) {
     let roverImg = document.createElement("img");
 
     roverImg.src = "images/rover.png";
     roverImg.alt = "rover";
     roverImg.id = "rover";
+    roverImg.style.transform = roverRotation[direction];
+    //roverImg.style.transition = "all 0.3s ease-out";
 
     document.getElementById("container").appendChild(roverImg);
 
@@ -164,10 +174,13 @@ function createRock() {
 function placeObject(element, posY, posX) {
     element.style.gridRowStart = posY + 1;
     element.style.gridColumnStart = posX + 1;
+    animationPlaceObject(element);
 }
 
-function moveRover(posY, posX) {
-    placeObject(rover, posY, posX);
+function moveRover(posY, posX, direction) {
+    roverImg.style.transform = roverRotation[direction];
+
+    placeObject(roverImg, posY, posX);
 }
 
 function setCommandInput(command) {
@@ -187,4 +200,49 @@ function hideModal() {
 function clearCommand() {
     clearCommandsArray();
     document.getElementById("input-commands").value = "";
+}
+
+function animationPlaceObject(element) {
+    element.animate(
+        [
+            { scale: 0.8, opacity: 0.5 },
+            { scale: 1, opacity: 1 },
+        ],
+        {
+            duration: 200,
+            easing: "ease-out",
+        }
+    );
+}
+
+function showError(message) {
+    const box = document.getElementById("message-box");
+    box.textContent = message;
+
+    box.classList.remove("message-success");
+    box.classList.add("message-error");
+
+    // mostrar
+    box.style.top = "20px";
+
+    // ocultar automáticamente
+    setTimeout(() => {
+        box.style.top = "-60px";
+    }, 2500);
+}
+
+function showSuccess(message) {
+    const box = document.getElementById("message-box");
+    box.textContent = message;
+
+    box.classList.remove("message-error");
+    box.classList.add("message-success");
+
+    // mostrar
+    box.style.top = "20px";
+
+    // ocultar automáticamente
+    setTimeout(() => {
+        box.style.top = "-60px";
+    }, 2500);
 }

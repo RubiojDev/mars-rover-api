@@ -11,7 +11,7 @@ export async function fetchGetRover() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error.message };
+            return { data: null, error: error };
         }
 
         const data = await response.json();
@@ -32,7 +32,7 @@ export async function fetchGetObstacles() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error.message };
+            return { data: null, error: error };
         }
 
         const data = await response.json();
@@ -94,7 +94,7 @@ export async function fetchDeleteObstacles() {
 
         if (!response.ok) {
             const error = await response.text();
-            return { data: null, error: error.message };
+            return { data: null, error: error };
         }
 
         const data = await response.text();

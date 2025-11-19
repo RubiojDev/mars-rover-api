@@ -7,7 +7,7 @@ body {
 
 #container {
     width: 100vw;
-    height: 85vh;
+    height: 80vh;
     display: grid;
     background-image: url("../images/texture_mars.jpg");
     background-size: cover;
@@ -16,7 +16,7 @@ body {
 
 #container-footer {
     width: 100vw;
-    height: 15vh;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,22 +32,56 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin: 5px 0px;
     gap: 5px;
 }
 
 #input-commands {
     text-align: center;
-    width: 300px;
-    height: 20px;
+    width: 305px;
+
+    background: none; /* Fondo negro */
+    color: white; /* Texto blanco */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* borde suave */
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 16px;
+
+    /* Glow */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+
+    outline: none; /* quitamos el outline por defecto */
+}
+
+/* Hover */
+#input-commands:hover {
+    cursor: default;
 }
 
 .button {
-    background: none;
+    /*background: none;
     border: none;
+    cursor: pointer;*/
+    background: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 5px;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 #view-panel img {
+    display: block;
     width: 25px;
     height: auto;
 }
@@ -60,9 +94,9 @@ body {
 }
 
 #controls img {
+    display: block;
     width: 40px;
     height: auto;
-    cursor: pointer;
 }
 
 .cell {
@@ -80,11 +114,13 @@ body {
 }
 
 #rover {
-    width: 95%;
+    width: 90%;
+    max-width: 150px;
 }
 
 .rocks {
-    width: 50%;
+    width: 90%;
+    max-width: 100px;
 }
 
 #modal-overlay {
@@ -99,7 +135,9 @@ body {
 }
 
 #coordinate-modal {
-    background: white;
+    background-image: url("../images/texture_mars.jpg");
+    background-size: initial;
+    background-position: center;
     padding: 10px;
     margin: 100px auto;
     width: 200px;
@@ -115,11 +153,13 @@ body {
 
 .title-row {
     text-align: center;
-    margin-bottom: 10px; /* espacio entre filas */
+    margin-bottom: 10px;
+    color: #fff;
 }
 
 .input-row label {
-    width: 50px; /* ancho fijo para que todos los labels se alineen */
+    width: 50px;
+    color: #fff;
 }
 
 .input-row button {
@@ -129,4 +169,29 @@ body {
 #posX-txt,
 #posY-txt {
     width: 40px;
+}
+
+#message-box {
+    position: fixed;
+    top: -60px; /* empieza escondido */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: top 0.3s ease;
+    z-index: 1000;
+    opacity: 0.95;
+}
+
+.message-error {
+    background: #ff4d4d; /* rojo error */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.message-success {
+    background: #4caf50;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
 }

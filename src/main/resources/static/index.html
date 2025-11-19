@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <div id="message-box"></div>
         <div id="container"></div>
         <div id="container-footer">
             <div id="view-panel">
@@ -15,7 +16,7 @@
                     id="input-commands"
                     name="input-commands"
                     readonly="true"
-                    placeholder="Commands"
+                    placeholder="Comandos"
                 />
                 <button
                     type="button"
@@ -90,8 +91,10 @@
                     <input type="number" id="posY-txt" min="0" />
                 </div>
                 <div class="input-row">
-                    <button id="setPositionBtn">OK</button>
-                    <button id="cancelBtn">Cancelar</button>
+                    <button id="setPositionBtn" name="setPositionBtn">
+                        OK
+                    </button>
+                    <button id="cancelBtn" name="cancelBtn">Cancelar</button>
                 </div>
             </div>
         </div>
