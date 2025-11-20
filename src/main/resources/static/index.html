@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <div id="message-box"></div>
         <div id="container"></div>
         <div id="container-footer">
             <div id="view-panel">
@@ -15,24 +16,89 @@
                     id="input-commands"
                     name="input-commands"
                     readonly="true"
-                    placeholder="Commands"
+                    placeholder="Comandos"
                 />
-                <button type="button" id="send-btn" name="send-btn">
+                <button
+                    type="button"
+                    id="send-btn"
+                    class="button"
+                    name="send-btn"
+                >
                     <img src="images/send.png" alt="send" />
                 </button>
-                <button type="button" id="clear-btn" name="clear-btn">
+                <button
+                    type="button"
+                    id="clear-btn"
+                    class="button"
+                    name="clear-btn"
+                >
                     <img src="images/clear.png" alt="clear" />
                 </button>
             </div>
             <div id="controls">
-                <img src="images/avanzar.png" alt="avanzar" />
-                <img src="images/girar_izquierda.png" alt="girar izquierda" />
-                <img src="images/girar_derecha.png" alt="girar derecha" />
-                <img src="images/obstacle.png" alt="obstacle" />
-                <img src="images/reset.png" alt="reset" />
+                <button
+                    type="button"
+                    id="moveForward-btn"
+                    class="button"
+                    name="moveForward-btn"
+                >
+                    <img src="images/moveForward.png" alt="move forward" />
+                </button>
+                <button
+                    type="button"
+                    id="turnLeft-btn"
+                    class="button"
+                    name="turnLeft-btn"
+                >
+                    <img src="images/turnLeft.png" alt="turn left" />
+                </button>
+                <button
+                    type="button"
+                    id="turnRight-btn"
+                    class="button"
+                    name="turnRight-btn"
+                >
+                    <img src="images/turnRight.png" alt="turn Right" />
+                </button>
+                <button
+                    type="button"
+                    id="obstacle-btn"
+                    class="button"
+                    name="obstacle-btn"
+                >
+                    <img src="images/obstacle.png" alt="obstacle" />
+                </button>
+                <button
+                    type="button"
+                    id="reset-btn"
+                    class="button"
+                    name="reset-btn"
+                >
+                    <img src="images/reset.png" alt="reset" />
+                </button>
             </div>
         </div>
 
-        <script src="javascript/script.js"></script>
+        <div id="modal-overlay">
+            <div id="coordinate-modal">
+                <div class="title-row">Ingrese la Posicion del Obstaculo</div>
+                <div class="input-row">
+                    <label for="posX-txt">Pos X:</label>
+                    <input type="number" id="posX-txt" min="0" />
+                </div>
+                <div class="input-row">
+                    <label for="posY-txt">Pos Y:</label>
+                    <input type="number" id="posY-txt" min="0" />
+                </div>
+                <div class="input-row">
+                    <button id="setPositionBtn" name="setPositionBtn">
+                        OK
+                    </button>
+                    <button id="cancelBtn" name="cancelBtn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="javascript/main.js"></script>
     </body>
 </html>
