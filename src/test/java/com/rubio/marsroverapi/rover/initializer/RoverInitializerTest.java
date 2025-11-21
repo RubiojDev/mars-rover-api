@@ -1,8 +1,8 @@
 package com.rubio.marsroverapi.rover.initializer;
 
+import com.rubio.marsroverapi.config.MapProperties;
 import com.rubio.marsroverapi.rover.models.Rover;
 import com.rubio.marsroverapi.rover.repositories.RoverRepository;
-import com.rubio.marsroverapi.shared.utilities.MapDimensions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -20,11 +20,16 @@ class RoverInitializerTest {
     RoverInitializer roverInitializer;
     @Mock
     RoverRepository repository;
+    @Mock
+    MapProperties mapProperties;
 
     @Test
     public void testInitRover_WhenDataBaseIsEmpty() {
         //Antes
         when(repository.count()).thenReturn(0L);
+        when(mapProperties.getWidth()).thenReturn(5);
+        when(mapProperties.getHeight()).thenReturn(5);
+
 
         //Entonces
         roverInitializer.initRover();
@@ -49,6 +54,8 @@ class RoverInitializerTest {
     public void testInitRover_WhenRoverIsCreate() {
         //Antes
         when(repository.count()).thenReturn(0L);
+        when(mapProperties.getWidth()).thenReturn(5);
+        when(mapProperties.getHeight()).thenReturn(5);
 
         //Entonces
         roverInitializer.initRover();
@@ -58,8 +65,8 @@ class RoverInitializerTest {
         verify(repository).save(roverCaptor.capture());
 
         Rover savedRover = roverCaptor.getValue();
-        assertTrue(savedRover.getPosX() >= 0 && savedRover.getPosX() < MapDimensions.WIDTH);
-        assertTrue(savedRover.getPosY() >= 0 && savedRover.getPosY() < MapDimensions.HEIGHT);
+        assertTrue(savedRover.getPosX() >= 0 && savedRover.getPosX() < mapProperties.getWidth());
+        assertTrue(savedRover.getPosY() >= 0 && savedRover.getPosY() < mapProperties.getHeight());
         assertNotNull(savedRover.getDirection());
     }
 

@@ -1,8 +1,10 @@
 package com.rubio.marsroverapi.rover.services.components.movement;
 
+import com.rubio.marsroverapi.config.MapProperties;
 import com.rubio.marsroverapi.rover.models.Rover;
 import com.rubio.marsroverapi.rover.validations.RoverValidation;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +21,14 @@ class MoveNorthStrategyTest {
     @Mock
     private RoverValidation roverValidation;
     @Mock
+    private MapProperties mapProperties;
+    @Mock
     private Rover rover;
+
+    @BeforeEach
+    void setUp() {
+        lenient().when(mapProperties.getHeight()).thenReturn(5);
+    }
 
     @Test
     public void testMove_WhenValidationIsFalse() {
