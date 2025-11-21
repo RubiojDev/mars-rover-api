@@ -1,16 +1,32 @@
 package com.rubio.marsroverapi.obstacle.validations;
 
+import com.rubio.marsroverapi.config.MapProperties;
 import com.rubio.marsroverapi.shared.exceptions.ObstacleCollisionException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class BoundsObstacleValidationTest {
     @InjectMocks
     private BoundsObstacleValidation validation;
+    @Mock
+    private MapProperties mapProperties;
+
+    @BeforeEach
+    void setUp() {
+
+        when(mapProperties.getWidth()).thenReturn(5);
+        when(mapProperties.getHeight()).thenReturn(5);
+
+    }
 
     @Test
     public void testIsValid_WhenIsNotValid() {
