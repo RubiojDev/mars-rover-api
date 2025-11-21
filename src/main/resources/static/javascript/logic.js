@@ -1,9 +1,12 @@
 import { commands } from "./state.js";
-import { fetchGetRover } from "./api.js";
-import { fetchAddObstacle } from "./api.js";
-import { fetchGetObstacles } from "./api.js";
-import { fetchSendCommands } from "./api.js";
-import { fetchDeleteObstacles } from "./api.js";
+import {
+    fetchGetRover,
+    fetchGetConfig,
+    fetchAddObstacle,
+    fetchSendCommands,
+    fetchGetObstacles,
+    fetchDeleteObstacles,
+} from "./api.js";
 
 export function clearCommandsArray() {
     commands.length = 0;
@@ -19,7 +22,7 @@ export function addCommandArray(command) {
 
 export function sendCommands() {
     if (commands.length === 0) {
-        return { error: "Invalid Command" };
+        return { data: null, error: "Invalid Command" };
     }
 
     return fetchSendCommands();
@@ -39,4 +42,8 @@ export function addObstacle(obstaclePosition) {
 
 export function deleteObstacles() {
     return fetchDeleteObstacles();
+}
+
+export function getConfig() {
+    return fetchGetConfig();
 }

@@ -1,23 +1,17 @@
-// Importar los módulos
-import {
-    fetchGetRover,
-    fetchGetObstacles,
-    fetchSendCommands,
-    fetchAddObstacle,
-    fetchDeleteObstacles,
-} from "./api.js";
+import { getConfig } from "./logic.js";
+import { renderMap } from "./dom/uiFunctions.js";
+import { initDOMEvents } from "./dom/eventListeners.js";
 
-import {
-    getRover,
-    getObstacles,
-    addObstacle,
-    sendCommands,
-    deleteObstacles,
-} from "./logic.js";
+document.addEventListener("DOMContentLoaded", init);
 
-import { commands } from "./state.js"; // Si estás usando un archivo de estado para manejar comandos (en caso de que lo tengas)
+async function init() {
+    const mapConfig = await getConfig();
+    const rows = mapConfig.data.height;
+    const cols = mapConfig.data.width;
 
-// Aquí importamos las funciones de dom.js también si es necesario
-import "./dom.js"; // Se puede importar solo el archivo dom.js para que se ejecute cuando se carga main.js
+    // renderiza el mapa
+    await renderMap(rows, cols);
 
-// Puedes inicializar o coordinar otras cosas aquí si es necesario
+    // inicializa los event listeners (que ahora los movemos a DOM init)
+    initDOMEvents();
+}
