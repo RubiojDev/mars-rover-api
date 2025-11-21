@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    min-height: 100%;
 }
 
 #container {
@@ -39,35 +40,29 @@ body {
 #input-commands {
     text-align: center;
     width: 305px;
-
-    background: none; /* Fondo negro */
-    color: white; /* Texto blanco */
-    border: 2px solid rgba(255, 255, 255, 0.3); /* borde suave */
+    background: none;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 8px 12px;
     font-size: 16px;
+    outline: none;
 
     /* Glow */
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-
-    outline: none; /* quitamos el outline por defecto */
 }
 
-/* Hover */
 #input-commands:hover {
     cursor: default;
 }
 
 .button {
-    /*background: none;
-    border: none;
-    cursor: pointer;*/
     background: none;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     transition: all 0.2s ease;
 }
 
@@ -145,10 +140,10 @@ body {
 }
 
 .input-row {
-    display: flex; /* hace que label e input estén en fila */
-    justify-content: center; /* opcional, alinea al inicio */
-    align-items: center; /* alinea verticalmente el input con el label */
-    margin-bottom: 10px; /* espacio entre filas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .title-row {
@@ -158,22 +153,42 @@ body {
 }
 
 .input-row label {
-    width: 50px;
+    width: 55px;
     color: #fff;
-}
-
-.input-row button {
-    margin-left: 10px; /* ancho fijo para que todos los labels se alineen */
 }
 
 #posX-txt,
 #posY-txt {
-    width: 40px;
+    width: 45px;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.modal-button {
+    margin-left: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    color: white;
+    padding: 5px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-button:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 #message-box {
     position: fixed;
-    top: -60px; /* empieza escondido */
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -187,7 +202,7 @@ body {
 }
 
 .message-error {
-    background: #ff4d4d; /* rojo error */
+    background: #ff4d4d;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
 

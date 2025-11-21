@@ -103,3 +103,24 @@ export async function fetchDeleteObstacles() {
         return { data: null, error: e.message };
     }
 }
+
+export async function fetchGetConfig() {
+    try {
+        let response = await fetch("/config", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            return { data: null, error: error };
+        }
+
+        const data = await response.json();
+        return { data, error: null };
+    } catch (e) {
+        return { data: null, error: e.message };
+    }
+}

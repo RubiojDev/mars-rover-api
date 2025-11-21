@@ -4,11 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mars Rover</title>
+        <link rel="icon" type="image/png" href="images/favicon.png" />
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
         <div id="message-box"></div>
+
         <div id="container"></div>
+
         <div id="container-footer">
             <div id="view-panel">
                 <input
@@ -16,7 +19,7 @@
                     id="input-commands"
                     name="input-commands"
                     readonly="true"
-                    placeholder="Comandos"
+                    placeholder="Commands"
                 />
                 <button
                     type="button"
@@ -24,7 +27,7 @@
                     class="button"
                     name="send-btn"
                 >
-                    <img src="images/send.png" alt="send" />
+                    <img src="images/send.png" alt="Send" />
                 </button>
                 <button
                     type="button"
@@ -32,9 +35,10 @@
                     class="button"
                     name="clear-btn"
                 >
-                    <img src="images/clear.png" alt="clear" />
+                    <img src="images/clear.png" alt="Clear" />
                 </button>
             </div>
+
             <div id="controls">
                 <button
                     type="button"
@@ -42,7 +46,10 @@
                     class="button"
                     name="moveForward-btn"
                 >
-                    <img src="images/moveForward.png" alt="move forward" />
+                    <img
+                        src="images/moveForward.png"
+                        alt="Move forward command"
+                    />
                 </button>
                 <button
                     type="button"
@@ -50,7 +57,7 @@
                     class="button"
                     name="turnLeft-btn"
                 >
-                    <img src="images/turnLeft.png" alt="turn left" />
+                    <img src="images/turnLeft.png" alt="Turn left command" />
                 </button>
                 <button
                     type="button"
@@ -58,7 +65,7 @@
                     class="button"
                     name="turnRight-btn"
                 >
-                    <img src="images/turnRight.png" alt="turn Right" />
+                    <img src="images/turnRight.png" alt="Turn right command" />
                 </button>
                 <button
                     type="button"
@@ -66,7 +73,7 @@
                     class="button"
                     name="obstacle-btn"
                 >
-                    <img src="images/obstacle.png" alt="obstacle" />
+                    <img src="images/obstacle.png" alt="Obstacle" />
                 </button>
                 <button
                     type="button"
@@ -74,27 +81,25 @@
                     class="button"
                     name="reset-btn"
                 >
-                    <img src="images/reset.png" alt="reset" />
+                    <img src="images/reset.png" alt="Reset" />
                 </button>
             </div>
         </div>
 
         <div id="modal-overlay">
             <div id="coordinate-modal">
-                <div class="title-row">Ingrese la Posicion del Obstaculo</div>
+                <div class="title-row">Enter the Position of the Obstacle</div>
                 <div class="input-row">
-                    <label for="posX-txt">Pos X:</label>
+                    <label for="posX-txt">Axis X:</label>
                     <input type="number" id="posX-txt" min="0" />
                 </div>
                 <div class="input-row">
-                    <label for="posY-txt">Pos Y:</label>
+                    <label for="posY-txt">Axis Y:</label>
                     <input type="number" id="posY-txt" min="0" />
                 </div>
                 <div class="input-row">
-                    <button id="setPositionBtn" name="setPositionBtn">
-                        OK
-                    </button>
-                    <button id="cancelBtn" name="cancelBtn">Cancelar</button>
+                    <button id="setPositionBtn" class="modal-button">OK</button>
+                    <button id="cancelBtn" class="modal-button">Cancel</button>
                 </div>
             </div>
         </div>
