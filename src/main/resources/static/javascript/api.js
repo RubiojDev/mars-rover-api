@@ -54,7 +54,7 @@ export async function fetchSendCommands() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error, message };
+            return { data: null, error: error.message };
         }
 
         const data = await response.json();
