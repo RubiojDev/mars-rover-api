@@ -157,8 +157,8 @@ body {
     color: #fff;
 }
 
-#posX-txt,
-#posY-txt {
+#input-posX,
+#input-posY {
     width: 45px;
     padding: 4px;
     border-radius: 5px;

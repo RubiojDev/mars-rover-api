@@ -11,7 +11,7 @@ export async function fetchGetRover() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error };
+            return { data: null, error: error.message };
         }
 
         const data = await response.json();
@@ -32,7 +32,7 @@ export async function fetchGetObstacles() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error };
+            return { data: null, error: error.message };
         }
 
         const data = await response.json();
@@ -54,7 +54,7 @@ export async function fetchSendCommands() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error };
+            return { data: null, error: error, message };
         }
 
         const data = await response.json();
@@ -75,8 +75,8 @@ export async function fetchAddObstacle(obstaclePosition) {
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            return { data: null, error: error };
+            const error = await response.json();
+            return { data: null, error: error.message };
         }
 
         const data = await response.json();
@@ -93,8 +93,8 @@ export async function fetchDeleteObstacles() {
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            return { data: null, error: error };
+            const error = await response.json();
+            return { data: null, error: error.message };
         }
 
         const data = await response.text();
@@ -115,7 +115,7 @@ export async function fetchGetConfig() {
 
         if (!response.ok) {
             const error = await response.json();
-            return { data: null, error: error };
+            return { data: null, error: error.message };
         }
 
         const data = await response.json();

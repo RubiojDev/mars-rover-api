@@ -9,9 +9,8 @@ async function init() {
     const rows = mapConfig.data.height;
     const cols = mapConfig.data.width;
 
-    // renderiza el mapa
     await renderMap(rows, cols);
 
-    // inicializa los event listeners (que ahora los movemos a DOM init)
+    // inicializa los event listeners
     initDOMEvents();
 }

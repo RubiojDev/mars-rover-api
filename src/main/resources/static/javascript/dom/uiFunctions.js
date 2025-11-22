@@ -16,20 +16,10 @@ const roverRotation = {
 };
 
 export async function renderMap(rows, cols) {
-    //reducir el metodo
     const container = document.getElementById("container");
     container.innerHTML = ""; // limpiar antes de volver a renderizar
 
-    // ajustar la cuadrícula según tamaño del mapa
-    container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-
-    // Crear las celdas vacías (solo para que se vea la cuadrícula)
-    for (let i = 0; i < rows * cols; i++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        container.appendChild(cell);
-    }
+    renderGrid(container, rows, cols);
 
     const responseRover = await getRover();
     if (responseRover.error) {
@@ -41,7 +31,6 @@ export async function renderMap(rows, cols) {
     placeObject(roverImg, responseRover.data.posY, responseRover.data.posX);
 
     const responseObstacles = await getObstacles();
-
     if (responseObstacles.error) {
         showError(responseObstacles.error);
         return;
@@ -51,6 +40,7 @@ export async function renderMap(rows, cols) {
         let rockImg = createRock();
         placeObject(rockImg, obstacle.posY, obstacle.posX);
     });
+
     showSuccess("Map Loaded");
 }
 
@@ -61,12 +51,13 @@ export function createRock() {
     rockImg.className = "rocks";
     rockImg.alt = "rocks";
 
-    document.getElementById("container").appendChild(rockImg);
+    //document.getElementById("container").appendChild(rockImg);
 
     return rockImg;
 }
 
 export function placeObject(element, posY, posX) {
+    document.getElementById("container").appendChild(element);
     element.style.gridRowStart = posY + 1;
     element.style.gridColumnStart = posX + 1;
     animationPlaceObject(element);
@@ -74,13 +65,14 @@ export function placeObject(element, posY, posX) {
 
 export function moveRover(posY, posX, direction) {
     roverImg.style.transform = roverRotation[direction];
-
     placeObject(roverImg, posY, posX);
 }
 
 export function setCommandInput(command) {
     if (addCommandArray(command)) {
         document.getElementById("input-commands").value = commands.join(", ");
+    } else {
+        showError("Max 15 commands allowed");
     }
 }
 
@@ -113,6 +105,19 @@ export function showError(message) {
     }, 2500);
 }
 
+function renderGrid(container, rows, cols) {
+    // ajustar la cuadrícula según tamaño del mapa
+    container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+    container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+    // Crear las celdas vacías (solo para que se vea la cuadrícula)
+    for (let i = 0; i < rows * cols; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        container.appendChild(cell);
+    }
+}
+
 function createRover(direction) {
     let roverImg = document.createElement("img");
 
@@ -120,9 +125,8 @@ function createRover(direction) {
     roverImg.alt = "rover";
     roverImg.id = "rover";
     roverImg.style.transform = roverRotation[direction];
-    //roverImg.style.transition = "all 0.3s ease-out";
 
-    document.getElementById("container").appendChild(roverImg);
+    //document.getElementById("container").appendChild(roverImg);
 
     return roverImg;
 }
