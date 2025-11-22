@@ -12,66 +12,77 @@ import {
 import { addObstacle, sendCommands, deleteObstacles } from "../logic.js";
 
 export function initDOMEvents() {
-    document.getElementById("moveForward-btn").addEventListener("click", () => {
-        setCommandInput("M");
-    });
+    document
+        .getElementById("button-moveForward")
+        .addEventListener("click", () => {
+            setCommandInput("M");
+        });
 
-    document.getElementById("turnRight-btn").addEventListener("click", () => {
-        setCommandInput("R");
-    });
+    document
+        .getElementById("button-turnRight")
+        .addEventListener("click", () => {
+            setCommandInput("R");
+        });
 
-    document.getElementById("turnLeft-btn").addEventListener("click", () => {
+    document.getElementById("button-turnLeft").addEventListener("click", () => {
         setCommandInput("L");
     });
 
-    document.getElementById("clear-btn").addEventListener("click", () => {
+    document.getElementById("button-clear").addEventListener("click", () => {
         clearCommand();
-    });
-
-    document.getElementById("obstacle-btn").addEventListener("click", () => {
-        showModal();
-    });
-
-    document.getElementById("cancelBtn").addEventListener("click", () => {
-        hideModal();
-    });
-
-    document.getElementById("send-btn").addEventListener("click", async () => {
-        const responseCommands = await sendCommands();
-
-        if (responseCommands.error) {
-            //manejar error
-            showError(responseCommands.error);
-            return;
-        }
-
-        const rover = responseCommands.data.roverDto;
-        const isObstacleEncountered = responseCommands.data.obstacleEncountered; //mostrar algun mensaje de obstaculo encontrado
-
-        if (isObstacleEncountered) {
-            showError("Obstacle Encoutered");
-        }
-        moveRover(rover.posY, rover.posX, rover.direction);
-        clearCommand();
-    });
-
-    document.getElementById("reset-btn").addEventListener("click", async () => {
-        const responseDelete = await deleteObstacles();
-
-        if (responseDelete.error) {
-            showError(responseDelete.error);
-            return;
-        }
-
-        const rocks = document.querySelectorAll(".rocks");
-        rocks.forEach((rock) => rock.remove());
     });
 
     document
-        .getElementById("setPositionBtn")
+        .getElementById("button-add-obstacle")
+        .addEventListener("click", () => {
+            showModal();
+        });
+
+    document.getElementById("button-cancel").addEventListener("click", () => {
+        hideModal();
+    });
+
+    document
+        .getElementById("button-send")
         .addEventListener("click", async () => {
-            const x = parseInt(document.getElementById("posX-txt").value);
-            const y = parseInt(document.getElementById("posY-txt").value);
+            const responseCommands = await sendCommands();
+
+            if (responseCommands.error) {
+                showError(responseCommands.error);
+                return;
+            }
+
+            const rover = responseCommands.data.roverDto;
+            const isObstacleEncountered =
+                responseCommands.data.obstacleEncountered;
+
+            if (isObstacleEncountered) {
+                showError("Obstacle Encoutered");
+            }
+
+            moveRover(rover.posY, rover.posX, rover.direction);
+            clearCommand();
+        });
+
+    document
+        .getElementById("button-reset")
+        .addEventListener("click", async () => {
+            const responseDelete = await deleteObstacles();
+
+            if (responseDelete.error) {
+                showError(responseDelete.error);
+                return;
+            }
+
+            const rocks = document.querySelectorAll(".rocks");
+            rocks.forEach((rock) => rock.remove());
+        });
+
+    document
+        .getElementById("button-send-position")
+        .addEventListener("click", async () => {
+            const x = parseInt(document.getElementById("input-posX").value);
+            const y = parseInt(document.getElementById("input-posY").value);
 
             if (x < 0 || y < 0 || isNaN(x) || isNaN(y)) {
                 showError("The coordinates must be positive numbers");

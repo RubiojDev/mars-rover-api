@@ -17,70 +17,34 @@
                 <input
                     type="text"
                     id="input-commands"
-                    name="input-commands"
-                    readonly="true"
+                    readonly
                     placeholder="Commands"
                 />
-                <button
-                    type="button"
-                    id="send-btn"
-                    class="button"
-                    name="send-btn"
-                >
+                <button type="button" id="button-send" class="button">
                     <img src="images/send.png" alt="Send" />
                 </button>
-                <button
-                    type="button"
-                    id="clear-btn"
-                    class="button"
-                    name="clear-btn"
-                >
+                <button type="button" id="button-clear" class="button">
                     <img src="images/clear.png" alt="Clear" />
                 </button>
             </div>
 
             <div id="controls">
-                <button
-                    type="button"
-                    id="moveForward-btn"
-                    class="button"
-                    name="moveForward-btn"
-                >
+                <button type="button" id="button-moveForward" class="button">
                     <img
                         src="images/moveForward.png"
                         alt="Move forward command"
                     />
                 </button>
-                <button
-                    type="button"
-                    id="turnLeft-btn"
-                    class="button"
-                    name="turnLeft-btn"
-                >
+                <button type="button" id="button-turnLeft" class="button">
                     <img src="images/turnLeft.png" alt="Turn left command" />
                 </button>
-                <button
-                    type="button"
-                    id="turnRight-btn"
-                    class="button"
-                    name="turnRight-btn"
-                >
+                <button type="button" id="button-turnRight" class="button">
                     <img src="images/turnRight.png" alt="Turn right command" />
                 </button>
-                <button
-                    type="button"
-                    id="obstacle-btn"
-                    class="button"
-                    name="obstacle-btn"
-                >
-                    <img src="images/obstacle.png" alt="Obstacle" />
+                <button type="button" id="button-add-obstacle" class="button">
+                    <img src="images/obstacle.png" alt="Add Obstacle" />
                 </button>
-                <button
-                    type="button"
-                    id="reset-btn"
-                    class="button"
-                    name="reset-btn"
-                >
+                <button type="button" id="button-reset" class="button">
                     <img src="images/reset.png" alt="Reset" />
                 </button>
             </div>
@@ -90,16 +54,20 @@
             <div id="coordinate-modal">
                 <div class="title-row">Enter the Position of the Obstacle</div>
                 <div class="input-row">
-                    <label for="posX-txt">Axis X:</label>
-                    <input type="number" id="posX-txt" min="0" />
+                    <label for="input-posX">Axis X:</label>
+                    <input type="number" id="input-posX" min="0" />
                 </div>
                 <div class="input-row">
-                    <label for="posY-txt">Axis Y:</label>
-                    <input type="number" id="posY-txt" min="0" />
+                    <label for="input-posY">Axis Y:</label>
+                    <input type="number" id="input-posY" min="0" />
                 </div>
                 <div class="input-row">
-                    <button id="setPositionBtn" class="modal-button">OK</button>
-                    <button id="cancelBtn" class="modal-button">Cancel</button>
+                    <button id="button-send-position" class="modal-button">
+                        OK
+                    </button>
+                    <button id="button-cancel" class="modal-button">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
