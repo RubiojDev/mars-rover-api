@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ObstacleDto {
-    @NotNull(message = "posX Required")
+    @NotNull(message = "Axis X Required")
     private Integer posX;
-    @NotNull(message = "posY Required")
+    @NotNull(message = "Axis Y Required")
     private Integer posY;
 }

@@ -51,8 +51,6 @@ export function createRock() {
     rockImg.className = "rocks";
     rockImg.alt = "rocks";
 
-    //document.getElementById("container").appendChild(rockImg);
-
     return rockImg;
 }
 
@@ -125,8 +123,6 @@ function createRover(direction) {
     roverImg.alt = "rover";
     roverImg.id = "rover";
     roverImg.style.transform = roverRotation[direction];
-
-    //document.getElementById("container").appendChild(roverImg);
 
     return roverImg;
 }
