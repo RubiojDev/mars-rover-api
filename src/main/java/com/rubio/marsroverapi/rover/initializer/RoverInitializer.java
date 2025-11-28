@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+/**
+ * Inicializa la posición del rover dentro del mapa si aun no ha sido establecida.
+ * <p>
+ * La ubicación generada se persiste en la base de datos para luego ser
+ * utilizada durante el funcionamiento de la aplicación.
+ */
 @Service
 public class RoverInitializer {
 
@@ -22,6 +28,15 @@ public class RoverInitializer {
         this.mapProperties = mapProperties;
     }
 
+    /**
+     * Inicializa las coordenadas del rover al arrancar la aplicación.
+     * <p>
+     * Si no existe un rover registrado en la base de datos, se generan de forma
+     * aleatoria sus coordenadas dentro de los límites del mapa, así como su
+     * dirección inicial.
+     * <p>
+     * Posteriormente, la información generada es almacenada de manera persistente.
+     */
     @PostConstruct
     public void initRover() {
         if (repository.count() == 0) {

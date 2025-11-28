@@ -4,6 +4,12 @@ import com.rubio.marsroverapi.obstacle.dto.ObstacleDto;
 import com.rubio.marsroverapi.obstacle.models.Obstacle;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementacion Manual de {@link ObstacleMapper}.
+ * <p>
+ * Realiza un Mapeo entre los campos equivalentes
+ * de la Entidad y el DTO.
+ */
 @Component
 public class ObstacleMapperImpl implements ObstacleMapper {
 

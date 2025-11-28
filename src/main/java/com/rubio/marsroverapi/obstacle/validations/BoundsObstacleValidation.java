@@ -4,6 +4,12 @@ import com.rubio.marsroverapi.config.MapProperties;
 import com.rubio.marsroverapi.shared.exceptions.ObstacleCollisionException;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementación de {@link ObstacleValidation}.
+ * <p>
+ * Ejecuta la validación en las coordenadas de los ejes X e Y
+ * para evitar el ingreso erróneo de posiciones fuera de los limites del mapa.
+ */
 @Component
 public class BoundsObstacleValidation implements ObstacleValidation {
 
@@ -13,6 +19,13 @@ public class BoundsObstacleValidation implements ObstacleValidation {
         this.mapProperties = mapProperties;
     }
 
+    /**
+     * Valida las coordenadas dadas y en caso de ser inválidas
+     * lanza una excepción personalizada: <code>ObstacleCollisionException</code>.
+     * @param posX Coordenada X dentro del mapa.
+     * @param posY Coordenada Y dentro del mapa.
+     * @throws ObstacleCollisionException Si las coordenadas se encuentran fuera de los limites del mapa
+     */
     @Override
     public void isValid(int posX, int posY) {
         final int limitMapX = mapProperties.getWidth();
