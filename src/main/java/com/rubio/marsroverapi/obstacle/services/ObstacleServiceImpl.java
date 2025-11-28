@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación de {@link ObstacleService}.
+ * <p>
+ * Gestiona el manejo de los obstáculos dentro del mapa mediante consultas
+ * a la base de datos, el uso de mapeadores y la aplicación de validaciones.
+ */
 @Service
 public class ObstacleServiceImpl implements ObstacleService {
     private final ObstacleRepository repository;
@@ -26,6 +32,11 @@ public class ObstacleServiceImpl implements ObstacleService {
         this.validationList = validationList;
     }
 
+    /**
+     * Realiza una busqueda en la base de datos para obtener todos los obstaculos
+     * y convertirlos a su representación DTO.
+     * @return Lista de {@link ObstacleDto}
+     */
     @Override
     public List<ObstacleDto> findAllObstacles() {
         List<Obstacle> obstacleList = repository.findAll();
@@ -38,6 +49,17 @@ public class ObstacleServiceImpl implements ObstacleService {
         return obstacleDtoList;
     }
 
+    /**
+     * Crea un nuevo obstáculo con las coordenadas proporcionadas.
+     * <p>
+     * Antes de persistirlo, se aplican todas las validaciones registradas. Si las
+     * coordenadas son válidas, el obstáculo es guardado en la base de datos y
+     * convertido a su DTO correspondiente.
+     *
+     * @param posX coordenada del eje X del mapa
+     * @param posY coordenada del eje Y del mapa
+     * @return {@link ObstacleDto} del obstáculo creado
+     */
     @Override
     public ObstacleDto createObstacle(int posX, int posY) {
         for (ObstacleValidation validation : validationList) {
@@ -52,6 +74,10 @@ public class ObstacleServiceImpl implements ObstacleService {
         return obstacleMapper.toDto(obstacle);
     }
 
+    /**
+     * Elimina todos los obstaculos existentes en la base de datos.
+     * @return Mensaje confirmando la operacion: <code>"Deleted Successfully"</code>
+     */
     @Override
     public String deleteAllObstacles() {
         repository.truncateTable();

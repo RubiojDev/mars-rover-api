@@ -4,6 +4,14 @@ import com.rubio.marsroverapi.rover.dto.RoverDto;
 import com.rubio.marsroverapi.rover.models.Rover;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementacion del {@link RoverMapper}.
+ * <p>
+ * Proporciona la conversión manual entre la entidad {@link Rover} y su
+ * representación como DTO {@link RoverDto}.
+ * <p>
+ * Esta conversión puede ser de manera bidireccional.
+ */
 @Component
 public class RoverMapperImpl implements RoverMapper {
 

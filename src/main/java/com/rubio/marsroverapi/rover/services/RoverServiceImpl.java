@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Implementación de {@link RoverService}.
+ * <p>
+ * Obtiene el estado actual del rover mediante consultas a la base de datos
+ * y gestiona la ejecución de los comandos que se le envíen.
+ */
 @Service
 public class RoverServiceImpl implements RoverService {
     private final RoverRepository repository;
@@ -32,6 +38,15 @@ public class RoverServiceImpl implements RoverService {
         this.roverCommandExecutor = roverCommandExecutor;
     }
 
+    /**
+     * Obtiene el estado actual del rover mediante una consulta a la base de datos.
+     * <p>
+     * Si el rover no se encuentra registrado, se lanzará una excepción personalizada
+     * {@link RoverNotFoundException}.
+     *
+     * @return un {@link RoverDto} que representa la posición y dirección actuales del rover
+     * @throws RoverNotFoundException si no existe un rover persistido con el identificador esperado
+     */
     @Override
     public RoverDto findRover() {
         Optional<Rover> rover = repository.findById(1);
@@ -45,6 +60,21 @@ public class RoverServiceImpl implements RoverService {
         );
     }
 
+    /**
+     * Procesa y ejecuta la lista de comandos proporcionada.
+     * <p>
+     * Primero verifica la existencia del rover. En caso de no existir,
+     * se lanzará una excepción {@link RoverNotFoundException}. Si existe,
+     * los comandos serán ejecutados mediante el {@link RoverCommandExecutor}.
+     * <p>
+     * Luego, se persiste el nuevo estado del rover y finalmente se construye
+     * la respuesta mediante el {@link CommandResponseMapper}.
+     *
+     * @param commandList lista de comandos que el rover debe ejecutar
+     * @return un {@link CommandResponseDto} con el estado final del rover y la información
+     *         sobre si se encontró algún obstáculo durante el recorrido
+     * @throws RoverNotFoundException si no existe un rover registrado
+     */
     @Override
     public CommandResponseDto setCommand(CommandRequestDto commandList) {
         Rover rover = repository.findById(1)
