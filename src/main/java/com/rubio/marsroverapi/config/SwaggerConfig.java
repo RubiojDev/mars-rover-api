@@ -25,6 +25,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Server(
                         description = "DEV SERVER",
                         url = "http://localhost:8080"
+                ),
+                @Server(
+                        description = "PRO SERVER",
+                        url = "https://mars-rover-api-production.up.railway.app"
                 )
         }
 )

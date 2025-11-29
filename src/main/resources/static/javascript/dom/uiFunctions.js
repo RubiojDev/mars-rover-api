@@ -47,7 +47,7 @@ export async function renderMap(rows, cols) {
 export function createRock() {
     const rockImg = document.createElement("img");
 
-    rockImg.src = "images/rocks.png";
+    rockImg.src = "images/rocks.webp";
     rockImg.className = "rocks";
     rockImg.alt = "rocks";
 
@@ -99,7 +99,7 @@ export function showError(message) {
 
     // ocultar automáticamente
     setTimeout(() => {
-        box.style.top = "-60px";
+        box.style.top = "-100%";
     }, 2500);
 }
 
@@ -119,7 +119,7 @@ function renderGrid(container, rows, cols) {
 function createRover(direction) {
     let roverImg = document.createElement("img");
 
-    roverImg.src = "images/rover.png";
+    roverImg.src = "images/rover.webp";
     roverImg.alt = "rover";
     roverImg.id = "rover";
     roverImg.style.transform = roverRotation[direction];
@@ -152,6 +152,6 @@ function showSuccess(message) {
 
     // ocultar automáticamente
     setTimeout(() => {
-        box.style.top = "-60px";
+        box.style.top = "-100%";
     }, 2500);
 }
