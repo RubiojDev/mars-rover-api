@@ -4,6 +4,8 @@ API REST en Java con Spring Boot siguiendo principios SOLID, que simula el movim
 El sistema posiciona un rover en un mapa, permite registrar obstáculos, y enviarle comandos para desplazarse o rotar. 
 Además, incluye un frontend estático para interactuar con la API y documentación en JavaDoc y Swagger/OpenAPI.
 
+🌐 **Prueba la API online:** [https://mars-rover-api-production.up.railway.app](https://mars-rover-api-production.up.railway.app)
+
 ---
 
 ## 🛠️ Tecnologías
@@ -105,6 +107,7 @@ Para correr los tests unitarios:
 - El frontend está en `src/main/resources/static/` (HTML, CSS y JS planos).
 - Puedes accederlo desde tu navegador en:
   http://localhost:8080
+- O en producción: [https://mars-rover-api-production.up.railway.app](https://mars-rover-api-production.up.railway.app)
 - Permite interactuar visualmente con el rover y los obstáculos, sin usar Postman.
 - Incluye botones para mover el rover y crear obstáculos en el mapa.
 
@@ -194,7 +197,9 @@ A continuación se muestran ejemplos de cómo utilizar la API con peticiones en 
 
 Accede a la documentación automática de los endpoints:
 
-http://localhost:8080/swagger-ui/index.html
+- Documentación local: http://localhost:8080/swagger-ui/index.html
+
+- Documentación producción: [https://mars-rover-api-production.up.railway.app/swagger-ui/index.html](https://mars-rover-api-production.up.railway.app/swagger-ui/index.html)
 
 Incluye todos los endpoints con ejemplos de request y response
 
