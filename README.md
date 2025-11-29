@@ -1,7 +1,8 @@
 # 🚀 Mars Rover API
 
 API REST en Java con Spring Boot siguiendo principios SOLID, que simula el movimiento de un rover en la superficie de Marte. 
-El sistema posiciona un rover en un mapa, permite registrar obstáculos, y enviarle comandos para desplazarse o rotar.
+El sistema posiciona un rover en un mapa, permite registrar obstáculos, y enviarle comandos para desplazarse o rotar. 
+Además, incluye un frontend estático para interactuar con la API y documentación en JavaDoc y Swagger/OpenAPI.
 
 ---
 
@@ -9,11 +10,13 @@ El sistema posiciona un rover en un mapa, permite registrar obstáculos, y envia
 
 - Java 21
 - Spring Boot 3.5.0
-- Maven 3.9.9
+- Maven 4.0.0
 - JUnit 5 / Mockito
 - Lombok
 - MySQL
 - Validaciones personalizadas con anotaciones
+- HTML, CSS y JavaScript (frontend en /src/main/resources/static)
+- Documentación Swagger / OpenAPI
 
 ---
 
@@ -27,8 +30,12 @@ Esta estructura permite:
 -   Aplicar principios como **Single Responsibility**.
 -   Evolucionar fácilmente hacia una **arquitectura limpia** o basada en **Domain-Driven Design (DDD)**.
 ```
+config/
+└── docs/
+
 obstacle/
 ├── controllers/
+├── docs/
 ├── dto/
 ├── mappers/ 
 ├── models/
@@ -38,6 +45,7 @@ obstacle/
 
 rover/
 ├── controllers/
+├── docs/
 ├── dto/
 │   ├── request/
 │   └── response/
@@ -55,15 +63,16 @@ rover/
 └── validations/
 
 shared/
-├── exceptions/
-└── utilities/
+└── exceptions/
+
+main/resources/static/         # Frontend (HTML, CSS, JS)
 ```
 ---
 ## ⚙️ Instalación
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/Rubioj17/mars-rover-api.git
+git clone https://github.com/RubiojDev/mars-rover-api.git
 ```
 2. Ingresa al proyecto:
 ```bash
@@ -90,6 +99,19 @@ Para correr los tests unitarios:
 ./mvnw test
 ```
 ---
+
+## 🌐 Frontend
+
+- El frontend está en `src/main/resources/static/` (HTML, CSS y JS planos).
+- Puedes accederlo desde tu navegador en:
+  http://localhost:8080
+- Permite interactuar visualmente con el rover y los obstáculos, sin usar Postman.
+- Incluye botones para mover el rover y crear obstáculos en el mapa.
+
+![Rover gif](/assets/front-gif.gif)
+
+---
+
 ## 📌 Principales Endpoints
  
 -   `POST /rover/command` – Envía una secuencia de comandos (`L`, `R`, `M`) al rover
@@ -168,11 +190,25 @@ A continuación se muestran ejemplos de cómo utilizar la API con peticiones en 
 -   Se usan validaciones personalizadas en los DTOs.
 ---
 
+## 📄 Documentación Swagger / OpenAPI
+
+Accede a la documentación automática de los endpoints:
+
+http://localhost:8080/swagger-ui/index.html
+
+Incluye todos los endpoints con ejemplos de request y response
+
+---
+
 ## 🧠 Notas de implementación
 
 -   Se usa una estructura de **estrategia** para mover el rover según su dirección.
     
 -   Los comandos del rover (`L`, `R`, `M`) se resuelven mediante el patrón **Command**.
+
+- Frontend integrado en `static/` para pruebas visuales
+
+- Documentación automática Swagger para los endpoints
 ---
 
 ## 🙋 Autor
